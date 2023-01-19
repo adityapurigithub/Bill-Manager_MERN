@@ -24,11 +24,17 @@ const Home = () => {
     console.log(form);
 
     //sending form to backend server
-    const response = await fetch("http://localhost:5000/", {
+    const response = await fetch("http://localhost:5000/transaction", {
       method: "POST",
-      body: form,
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        data: form,
+      }),
     });
-    console.log(response);
+    const data = await response.json();
+    console.log(data);
   };
 
   return (
