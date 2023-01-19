@@ -1,0 +1,99 @@
+.App {
+  background-color: #282c34;
+  min-height: 100vh;
+  color: white;
+}
+.nav img {
+  cursor: pointer;
+}
+.bar {
+  margin: 0 15px;
+}
+
+.form {
+  width: 40%;
+  position: relative;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.form input {
+  width: 100%;
+  border-radius: 10px;
+  padding: 12px 40px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 0;
+  outline: 0;
+  color: white;
+}
+
+.form input:focus {
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+}
+
+.profile img {
+  object-fit: contain;
+  height: 35px;
+  padding: 5px;
+}
+.compose-btn {
+  cursor: pointer;
+  padding: 15px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+}
+.compose-btn span:nth-child(2n) {
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 600;
+  padding: 0 10px;
+}
+.side-options button {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  outline: 0;
+  border: 0;
+  padding: 10px;
+  margin: 1px 0;
+  border-radius: 10px;
+}
+
+.side-options button {
+  width: 100%;
+}
+.hide {
+  width: 0 !important;
+  transform: translateX(-200px);
+  transition: all ease 0.6s;
+}
+.show {
+  transition: all ease 0.5s;
+  width: 300px;
+  transform: translateX(0);
+}
+/*  */
+/*  */
+
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
