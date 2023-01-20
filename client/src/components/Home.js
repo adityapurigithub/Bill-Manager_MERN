@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Home = () => {
-  const [form, setForm] = useState({
+  const initialForm = {
     amount: "",
     description: "",
     date: "",
-  });
+  };
+  const [form, setForm] = useState(initialForm);
+  const [transaction, setTransaction] = useState([]);
+
+  useEffect(() => {
+    fetchTransactionFromDb();
+  }, []);
+
+  const fetchTransactionFromDb = async () => {
+    const response = await fetch("http://localhost:5000/transaction");
+
+    const data = await response.json();
+
+    setTransaction(data.data);
+  };
 
   const handleChange = (e) => {
     // if (e.target.name === "amount") {
@@ -21,7 +35,6 @@ const Home = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
 
     //sending form to backend server
     const response = await fetch("http://localhost:5000/transaction", {
@@ -33,8 +46,14 @@ const Home = () => {
         data: form,
       }),
     });
-    const data = await response.json();
-    console.log(data);
+    // const data = await response.json();
+    // console.log(data);
+    console.log(response);
+    //also fetching transaction as soon as we add a new one
+    if (response.ok) {
+      fetchTransactionFromDb();
+    }
+    setForm(initialForm);
   };
 
   return (
@@ -42,7 +61,7 @@ const Home = () => {
       <form onSubmit={handleSubmit}>
         <input
           name="amount"
-          type="text"
+          type="number"
           placeholder="Enter Amount"
           value={form.amount}
           onChange={handleChange}
@@ -63,6 +82,24 @@ const Home = () => {
         />
         <button type="submit">Done</button>
       </form>
+      <table>
+        <thead>
+          <tr>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {transaction.map((trx) => (
+            <tr key={trx._id}>
+              <td>{trx.amount}</td>
+              <td>{trx.description}</td>
+              <td>{trx.date.substring(0, 10)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

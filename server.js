@@ -1,10 +1,20 @@
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
+import { db } from "./config/db.js";
+
 import bodyParser from "body-parser";
+
+// import Transaction from "./models/transaction.js";
+import transactionAPI from "./routes/transactionAPI.js";
+
 const port = process.env.PORT || 5000;
 
 const app = express();
+
+//aquring mongo db connection........
+await db();
+// .......................
 
 //calling cors used for handling cors err
 app.use(cors());
@@ -12,22 +22,11 @@ app.use(cors());
 //bodyParser.json() -remeber to handling/get data from req.body
 app.use(bodyParser.json());
 
-//mongo connection................................
-await mongoose.connect(
-  "mongodb+srv://aditya99:KCfPhVqlLfEPkKGS@cluster0.zwofint.mongodb.net/?retryWrites=true&w=majority"
-);
-console.log("mongo connected");
-//.........................................
-
 app.get("/", (req, res) => {
-  res.send("hey");
+  res.send("hi");
 });
-app.post("/transaction", (req, res) => {
-  res.json({
-    message: "Hello React User",
-  });
-  console.log(req.body);
-});
+//separated the routes Using express Router..
+app.use("/transaction", transactionAPI);
 
 app.listen(port, (err) => {
   if (err) {
