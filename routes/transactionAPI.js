@@ -1,33 +1,40 @@
 import { Router } from "express";
-import Transaction from "../models/transaction.js";
+import {
+  createTransaction,
+  deleteTransaction,
+  getTransactions,
+  updateTransaction,
+} from "../controller/transactionController.js";
+// import Transaction from "../models/transaction.js";
+
+import passport from "passport";
 
 const router = Router();
 
-router.post("/", async (req, res) => {
-  const { amount, description, date } = req.body.data;
-
-  const transactions = new Transaction({
-    // amount:amount   //using short hand
-    amount,
-    description,
-    date,
-  });
-  await transactions.save();
-
-  res.json({
-    // data: transactions,
-    message: "Success!!!, Transaction Created",
-  });
-  console.log(transactions);
-});
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  createTransaction
+);
 
 // created this get route for fetching transactions..
-router.get("/", async (req, res) => {
-  const transactions = await Transaction.find({}).sort({ createdAt: -1 });
-  //sort according to reverse order so createdAt:-1 used
-  res.json({
-    data: transactions,
-  });
-});
+//applying passport middleware....for authenticated user to fetch transactions...
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  getTransactions
+);
+
+router.delete(
+  "/delete-transcation/:id",
+  passport.authenticate("jwt", { session: false }),
+  deleteTransaction
+);
+
+router.patch(
+  "/update/:id",
+  passport.authenticate("jwt", { session: false }),
+  updateTransaction
+);
 
 export default router;

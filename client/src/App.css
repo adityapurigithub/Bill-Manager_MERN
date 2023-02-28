@@ -1,99 +1,44 @@
 .App {
-  background-color: #282c34;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: auto;
+}
+a {
   color: white;
-}
-.nav img {
-  cursor: pointer;
-}
-.bar {
-  margin: 0 15px;
+  text-decoration: none;
 }
 
-.form {
-  width: 40%;
-  position: relative;
-  justify-content: center !important;
-  align-items: center !important;
-}
-.form input {
+.loader-wrapper {
+  z-index: 100;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
   width: 100%;
-  border-radius: 10px;
-  padding: 12px 40px;
-  background: rgba(255, 255, 255, 0.7);
-  border: 0;
-  outline: 0;
-  color: white;
-}
-
-.form input:focus {
-  background-color: rgb(255, 255, 255);
-  color: black;
-}
-
-.profile {
-  display: flex;
-  justify-content: center;
-}
-
-.profile img {
-  object-fit: contain;
-  height: 35px;
-  padding: 5px;
-}
-.compose-btn {
-  cursor: pointer;
-  padding: 15px;
-  margin: 10px;
+  background-color: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  border-radius: 10px;
 }
-.compose-btn span:nth-child(2n) {
-  font-size: 1rem;
-  font-style: italic;
-  font-weight: 600;
-  padding: 0 10px;
+.loader {
+  width: 100px;
+  height: 100px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #599100;
+  border-radius: 50%;
+  animation: spin 0.5s linear infinite;
 }
-.side-options button {
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.6);
-  outline: 0;
-  border: 0;
-  padding: 10px;
-  margin: 1px 0;
-  border-radius: 10px;
+.loader-inner {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border: 2px solid transparent;
+  border-top-color: #bbff4e;
+  border-radius: 50%;
+  animation: spin 0.4s linear infinite reverse;
 }
-
-.side-options button {
-  width: 100%;
+@keyframes spin {
+  100% {
+    transform: rotate(1turn);
+  }
 }
-.hide {
-  width: 0 !important;
-  transform: translateX(-200px);
-  transition: all ease 0.6s;
-}
-.show {
-  transition: all ease 0.5s;
-  width: 300px;
-  transform: translateX(0);
-}
-/*  */
-/*  */
-
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
